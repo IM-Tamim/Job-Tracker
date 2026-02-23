@@ -163,6 +163,42 @@ mainContainer.addEventListener("click", function (event) {
       renderInterview();
     }
     calculateCount();
+  } else if (event.target.classList.contains("delete_btn") || event.target.closest(".delete_btn")) {
+    const deleteBtn = event.target.closest(".delete_btn");
+    const cardToDelete = deleteBtn.closest(".card");
+    const title = cardToDelete.querySelector(".title").innerText;
+
+    interviewList = interviewList.filter((item) => item.title !== title);
+    rejectedList = rejectedList.filter((item) => item.title !== title);
+
+    const originalCards = allCards.querySelectorAll(".card");
+    for (let card of originalCards) {
+      if (card.querySelector(".title").innerText === title) {
+        card.remove();
+        break;
+      }
+    }
+
+    if (cardToDelete.closest("#othercards")) {
+      cardToDelete.remove();
+    }
+
+    calculateCount();
+
+    if (currentStatus === "interview_btn") {
+      renderInterview();
+    } else if (currentStatus === "rejected_btn") {
+      renderRejected();
+    } else if (currentStatus === "all_btn") {
+
+      const visibleCards = document.querySelectorAll("#allcards .card:not(.dontCount)");
+      jobCount.innerText = visibleCards.length;
+
+      const allPlaceholder = document.getElementById("placeholder_card_all");
+      if (visibleCards.length === 0) {
+        allPlaceholder.classList.remove("hidden");
+      }
+    }
   }
 });
 
