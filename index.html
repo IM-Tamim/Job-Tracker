@@ -13,7 +13,74 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body>
-    
+  <body class="min-h-screen w-full bg-gray-100">
+    <header class="Dashboard max-w-7xl mx-auto">
+      <h1 class="text-3xl font-bold mb-6 pt-[60px]">Job Application Tracker</h1>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left"
+      >
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h2 class="text-gray-500 text-sm">Total</h2>
+          <p id="dash_all" class="text-3xl font-bold mt-2">0</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h2 class="text-gray-500 text-sm">Interview</h2>
+          <p id="dash_interview" class="text-3xl font-bold mt-2 text-green-600">
+            0
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h2 class="text-gray-500 text-sm">Rejected</h2>
+          <p id="dash_rejected" class="text-3xl font-bold mt-2 text-red-600">
+            0
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <hr class="my-6 text-gray-300 max-w-7xl mx-auto" />
+
+    <main class="max-w-7xl mx-auto space-y-4">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold">Available Jobs</h2>
+        <p class="text-gray-500"><span id="job_count">0</span> jobs</p>
+      </div>
+      <div class="flex gap-4 mb-6 pb-2">
+        <button id="all_btn" class="px-4 py-2 bg-blue-600 text-white rounded-lg">All</button>
+        <button id="interview_btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg">Interview</button>
+        <button id="rejected_btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg">Rejected</button>
+      </div>
+
+      <section id="allcards">
+        <!-- card-1 -->
+         <div class="card flex justify-between bg-white p-6 rounded-xl shadow">
+          <div>
+            <p class="title font-semibold text-lg ">Mobile First Corp</p>
+            <p class="type text-gray-500 mb-2">React Native Developer</p>
+            <p class="salary text-gray-500 text-sm mb-4">Remote • Full-time • $130,000 - $175,000</p>
+            <span class="status text-xs font-semibold px-4 py-2 rounded-md bg-blue-100 text-blue-700 ">NOT APPLIED</span>
+            <p class="note my-4 text-gray-600 text-sm">Build cross-platform mobile applications using React Native and deliver high-performance mobile experiences.</p>
+            <div class="flex gap-3">
+              <button class="interview_btn border border-green-500 text-green-600 px-4 py-1 rounded-md hover:bg-green-500 hover:text-white">
+                INTERVIEW
+              </button>
+              <button class="rejected_btn border border-red-500 text-red-600 px-4 py-1 rounded-md hover:bg-red-500 hover:text-white">
+                REJECTED
+              </button>
+            </div>
+          </div>
+          <div>
+            <button class="delete_btn text-gray-500 hover:text-red-500">
+              <div class="bg-gray-100 rounded-full p-2">
+                <i class="fa-regular fa-trash-can"></i>
+              </div>
+            </button>
+          </div>
+         </div>
+      </section>
+    </main>
   </body>
 </html>
