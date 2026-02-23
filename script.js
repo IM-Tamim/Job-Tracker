@@ -33,3 +33,37 @@ function toggling(id){
     selected.classList.remove('bg-gray-200', 'text-gray-700')
     selected.classList.add('bg-blue-600', 'text-white')
 }
+
+mainContainer.addEventListener('click',function(event){
+    if (event.target.classList.contains("interview_btn")){
+        const parentNode = event.target.parentNode.parentNode
+        const title = parentNode.querySelector('.title').innerText
+        const type = parentNode.querySelector('.type').innerText
+        const salary = parentNode.querySelector('.salary').innerText
+        const note = parentNode.querySelector('.note').innerText
+        
+        const status = parentNode.querySelector('.status')
+         status.innerText = "INTERVIEW";
+         status.classList.remove(
+            "bg-blue-100",
+            "text-blue-700",
+            "bg-red-100",
+            "text-red-700",
+         );
+         status.classList.add("bg-green-100", "text-green-700");
+        
+        const cardInfo ={
+            title,
+            type,
+            salary,
+            status,
+            note
+        };
+        const card_exist = interviewList.find( (item) => item.title == cardInfo.title);
+        if (!card_exist) {
+         interviewList.push(cardInfo);
+        }
+        }
+        console.log(interviewList)
+    
+})
