@@ -1,10 +1,11 @@
 let interviewList = [];
 let rejectedList = [];
-let currentStatus ='all_btn';
+let currentStatus = "all_btn";
 
 let allCount = document.getElementById("dash_all");
 let interviewCount = document.getElementById("dash_interview");
 let rejectCount = document.getElementById("dash_rejected");
+let jobCount = document.getElementById("job_count");
 
 const allBtn = document.getElementById("all_btn");
 const interviewBtn = document.getElementById("interview_btn");
@@ -25,8 +26,7 @@ function calculateCount() {
 calculateCount();
 
 function toggling(id) {
-    currentStatus=id;
-    console.log(currentStatus);
+  currentStatus = id;
 
   allBtn.classList.remove("bg-blue-600", "text-white");
   interviewBtn.classList.remove("bg-blue-600", "text-white");
@@ -45,6 +45,10 @@ function toggling(id) {
 
   if (id == "all_btn") {
     allCards.classList.remove("hidden");
+    const visibleCards = document.querySelectorAll(
+      "#allcards .card:not(.dontCount)",
+    );
+    jobCount.innerText = visibleCards.length;
   } else if (id == "interview_btn") {
     otherCards.classList.remove("hidden");
     renderInterview();
@@ -86,8 +90,8 @@ mainContainer.addEventListener("click", function (event) {
       interviewList.push(cardInfo);
     }
     rejectedList = rejectedList.filter((item) => item.title != cardInfo.title);
-    if(currentStatus == 'rejected_btn'){
-        renderRejected();
+    if (currentStatus == "rejected_btn") {
+      renderRejected();
     }
     calculateCount();
   } else if (event.target.classList.contains("rejected_btn")) {
@@ -123,14 +127,15 @@ mainContainer.addEventListener("click", function (event) {
     interviewList = interviewList.filter(
       (item) => item.title != cardInfo.title,
     );
-    if(currentStatus == 'interview_btn'){
-        renderInterview();
+    if (currentStatus == "interview_btn") {
+      renderInterview();
     }
     calculateCount();
   }
 });
 
 function renderInterview() {
+  jobCount.innerText = interviewList.length;
   filterCards.innerHTML = "";
   for (item of interviewList) {
     let div = document.createElement("div");
@@ -164,6 +169,7 @@ function renderInterview() {
   }
 }
 function renderRejected() {
+  jobCount.innerText = rejectedList.length;
   filterCards.innerHTML = "";
   for (item of rejectedList) {
     let div = document.createElement("div");
