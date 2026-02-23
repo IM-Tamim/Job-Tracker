@@ -76,6 +76,22 @@ mainContainer.addEventListener("click", function (event) {
     );
     status.classList.add("bg-green-100", "text-green-700");
 
+    const originalCards = allCards.querySelectorAll(".card");
+    for (let card of originalCards) {
+      if (card.querySelector(".title").innerText === title) {
+        const originalStatus = card.querySelector(".status");
+        originalStatus.innerText = "INTERVIEW";
+        originalStatus.classList.remove(
+          "bg-blue-100",
+          "text-blue-700",
+          "bg-red-100",
+          "text-red-700",
+        );
+        originalStatus.classList.add("bg-green-100", "text-green-700");
+        break;
+      }
+    }
+
     const cardInfo = {
       title,
       type,
@@ -106,10 +122,26 @@ mainContainer.addEventListener("click", function (event) {
     status.classList.remove(
       "bg-blue-100",
       "text-blue-700",
-      "bg-red-100",
-      "text-red-700",
+      "bg-green-100",
+      "text-green-700",
     );
     status.classList.add("bg-red-100", "text-red-700");
+
+    const originalCards = allCards.querySelectorAll(".card");
+    for (let card of originalCards) {
+      if (card.querySelector(".title").innerText === title) {
+        const originalStatus = card.querySelector(".status");
+        originalStatus.innerText = "REJECTED";
+        originalStatus.classList.remove(
+          "bg-blue-100",
+          "text-blue-700",
+          "bg-green-100",
+          "text-green-700",
+        );
+        originalStatus.classList.add("bg-red-100", "text-red-700");
+        break;
+      }
+    }
 
     const cardInfo = {
       title,
@@ -137,6 +169,15 @@ mainContainer.addEventListener("click", function (event) {
 function renderInterview() {
   jobCount.innerText = interviewList.length;
   filterCards.innerHTML = "";
+
+  if (interviewList.length === 0) {
+    const placeholder = document.getElementById("placeholder_card_other");
+    placeholder.classList.remove("hidden");
+    return;
+  } else {
+    document.getElementById("placeholder_card_other").classList.add("hidden");
+  }
+
   for (item of interviewList) {
     let div = document.createElement("div");
     div.innerHTML = `
@@ -171,6 +212,15 @@ function renderInterview() {
 function renderRejected() {
   jobCount.innerText = rejectedList.length;
   filterCards.innerHTML = "";
+
+  if (rejectedList.length === 0) {
+    const placeholder = document.getElementById("placeholder_card_other");
+    placeholder.classList.remove("hidden");
+    return;
+  } else {
+    document.getElementById("placeholder_card_other").classList.add("hidden");
+  }
+
   for (item of rejectedList) {
     let div = document.createElement("div");
     div.innerHTML = `
